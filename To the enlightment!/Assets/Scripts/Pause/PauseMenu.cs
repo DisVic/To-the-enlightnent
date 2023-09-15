@@ -4,41 +4,45 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public GameObject pauseMenu;//меню паузы
+    [SerializeField] private GameObject pauseMenu;//меню паузы
     public static bool isPaused;//проверка состояния игры на паузу
     void Start()
     {
-        pauseMenu.SetActive(false);//изначально пауза выключена
+        PauseMenuOff();
     }
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))//при нажатии на Escape игра останавливается или возобновляется
-        {
-            if(isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
-        }
+        PauseMenuOn();
     }
-    public void PauseGame()//функция приостановки игры
+    private void PauseGame()//функция приостановки игры
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused= true;
     }
-    public void ResumeGame()//функция продолжения игры
+    private void ResumeGame()//функция продолжения игры
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
     }
-    public void Quit()//функция выхода из игры
+    private void PauseMenuOff() => pauseMenu.SetActive(false);//изначально пауза выключена
+    private void StatusPauseMenu()//зависимость состояния игры
     {
-        Application.Quit();
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+    private void PauseMenuOn()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))//при нажатии на Escape игра останавливается или возобновляется
+        {
+            StatusPauseMenu();
+        }
     }
 }

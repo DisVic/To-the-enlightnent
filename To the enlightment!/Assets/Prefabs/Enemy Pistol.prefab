@@ -102,7 +102,7 @@ MonoBehaviour:
   distance: 3
   damage: 12
   Fire: {fileID: 9156352127885313508, guid: 8be8f4e49b83f234387432b49a5af614, type: 3}
+  EnemyBullet: 1
   solid:
     serializedVersion: 2
     m_Bits: 64
-  EnemyBullet: 1
